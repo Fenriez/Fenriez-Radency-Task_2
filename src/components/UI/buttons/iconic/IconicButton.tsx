@@ -5,11 +5,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-type iconicButtonProps = {
+interface iconic_button_props {
     type: string
 }
 
-const IconicButton = ({type}: iconicButtonProps) => {
+const IconicButton = ({type, ...props}: iconic_button_props) => {
   let icon: React.ReactNode;
 
   if (type === "edit") {

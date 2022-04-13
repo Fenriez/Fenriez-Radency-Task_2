@@ -1,7 +1,14 @@
+import { useState } from "react";
 import Note from "./components/Note";
+import CustomButton from "./components/UI/buttons/custom/CustomButton";
+import NoteForm from "./components/UI/form/NoteForm";
+import CustomModal from "./components/UI/modal/CustomModal";
 import "./styles/App.css";
 
 function App() {
+
+  const [visible, setVisible] = useState(false)
+
   return (
     <div className="App">
       <div className="App_content">
@@ -28,14 +35,15 @@ function App() {
           <div className="container__footer">
             <div className="footer__cell"></div>
             <div className="footer__cell">
-              <button id="create_note" className="custom_btn">
-                Create note
-              </button>
+              <CustomButton text="Create note" onClick={() => {setVisible(true)}}/>
             </div>
           </div>
         </section>
         <section className="container categories"></section>
       </div>
+      <CustomModal active={visible}>
+        <NoteForm set_active={setVisible}></NoteForm>
+      </CustomModal>
     </div>
   );
 }
