@@ -1,13 +1,15 @@
-import { useState } from "react";
-import Note from "./components/Note";
+import { useDispatch } from "react-redux";
+import NotesContainer from "./components/NotesContainer";
 import CustomButton from "./components/UI/buttons/custom/CustomButton";
-import NoteForm from "./components/UI/form/NoteForm";
+import NoteForm from "./components/UI/forms/NoteForm";
 import CustomModal from "./components/UI/modal/CustomModal";
+import { useTypedSelector } from "./hooks/useTypedSelector";
+import { toggleModal } from "./store/actions/modalActions";
 import "./styles/App.css";
 
 function App() {
-
-  const [visible, setVisible] = useState(false)
+  const { modalVisible } = useTypedSelector((state) => state.modal);
+  const dispatch = useDispatch();
 
   return (
     <div className="App">
@@ -29,20 +31,24 @@ function App() {
               </button>
             </div>
           </div>
-          <div className="container__body">
-            <Note />
-          </div>
+          <NotesContainer />
           <div className="container__footer">
             <div className="footer__cell"></div>
             <div className="footer__cell">
-              <CustomButton text="Create note" onClick={() => {setVisible(true)}}/>
+              <CustomButton
+                text="Create note"
+                type="button"
+                onClick={() => {
+                  dispatch(toggleModal());
+                }}
+              />
             </div>
           </div>
         </section>
         <section className="container categories"></section>
       </div>
-      <CustomModal active={visible}>
-        <NoteForm set_active={setVisible}></NoteForm>
+      <CustomModal active={modalVisible}>
+        <NoteForm></NoteForm>
       </CustomModal>
     </div>
   );
