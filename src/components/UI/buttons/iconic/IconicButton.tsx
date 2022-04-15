@@ -10,7 +10,7 @@ import { toggleModal } from "../../../../store/actions/modalActions";
 interface iconic_button_props {
   type: string;
   onClick: any;
-  targetID: number;
+  targetID?: number;
 }
 
 const IconicButton = ({ type, ...props }: iconic_button_props) => {
@@ -29,10 +29,20 @@ const IconicButton = ({ type, ...props }: iconic_button_props) => {
     onClick = (): void => {
       dispatch(props.onClick(props.targetID));
     }
+  } else if (type === "archiveAll") {
+    icon = <FontAwesomeIcon icon={faBoxArchive} />;
+    onClick = (): void => {
+      dispatch(props.onClick());
+    }
   } else if (type === "delete") {
     icon = <FontAwesomeIcon icon={faTrashCan} />;
     onClick = (): void => {
       dispatch(props.onClick(props.targetID));
+    }
+  } else if (type === "deleteAll") {
+    icon = <FontAwesomeIcon icon={faTrashCan} />;
+    onClick = (): void => {
+      dispatch(props.onClick());
     }
   }
 

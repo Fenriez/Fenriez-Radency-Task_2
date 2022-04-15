@@ -23,6 +23,8 @@ enum notesActionTypes {
   ADD_NOTE = "ADD_NOTE",
   SET_NOTE = "SET_NOTE",
   CLEAR_NOTE = "CLEAR_NOTE",
+  ARCHIVE_NOTE = "ARCHIVE_NOTE",
+  ARCHIVE_NOTES = "ARCHIVE_NOTES",
   REMOVE_NOTE = "REMOVE_NOTE",
   REMOVE_NOTES = "REMOVE_NOTES",
   EDIT_NOTE = "EDIT_NOTE",
@@ -36,7 +38,7 @@ enum noteActionTypes {
 
 interface addNoteAction {
   type: notesActionTypes.ADD_NOTE;
-  payload?: noteFormData;
+  payload?: undefined;
 }
 interface setNoteAction {
   type: notesActionTypes.SET_NOTE;
@@ -44,7 +46,15 @@ interface setNoteAction {
 }
 interface clearNoteAction {
   type: notesActionTypes.CLEAR_NOTE;
+  payload?: undefined;
+}
+interface archiveNoteAction {
+  type: notesActionTypes.ARCHIVE_NOTE;
   payload: number;
+}
+interface archiveAllNotesAction {
+  type: notesActionTypes.ARCHIVE_NOTES;
+  payload?: undefined;
 }
 interface removeNoteAction {
   type: notesActionTypes.REMOVE_NOTE;
@@ -52,17 +62,19 @@ interface removeNoteAction {
 }
 interface removeAllNotesAction {
   type: notesActionTypes.REMOVE_NOTES;
-  payload?: any;
+  payload?: undefined;
 }
 interface editNoteAction {
   type: notesActionTypes.EDIT_NOTE;
-  payload?: noteFormData;
+  payload?: undefined;
 }
 
 export type notesAction =
   | addNoteAction
   | setNoteAction
   | clearNoteAction
+  | archiveNoteAction
+  | archiveAllNotesAction
   | removeNoteAction
   | removeAllNotesAction
   | editNoteAction;
@@ -133,6 +145,18 @@ export const notesReducer = (
         ...state,
         note: initialState.note,
       };
+
+    case notesActionTypes.ARCHIVE_NOTE:
+      return {
+        notes: archiveNote(state.notes, payload),
+        note: initialState.note,
+      };
+    case notesActionTypes.ARCHIVE_NOTES:
+      return {
+        notes: archiveNotes(state.notes),
+        note: initialState.note,
+      };
+
     case notesActionTypes.REMOVE_NOTE:
       return {
         notes: removeNote(state.notes, payload),
@@ -164,6 +188,27 @@ const createNote = (note: noteState): noteState => {
 
 const findNote = (notes: noteState[], id: number): noteState | undefined =>
   notes.find((note) => note.id === id);
+
+const archiveNote = (notes: noteState[], id: number): noteState[] => {
+  return notes.map((note) => {
+    if (note.id === id) {
+      return {
+        ...note,
+        isArchived: !note.isArchived,
+      };
+    }
+    return note;
+  });
+};
+
+const archiveNotes = (notes: noteState[]): noteState[] => {
+  return notes.map((note) => {
+    return {
+      ...note,
+      isArchived: true,
+    };
+  });
+};
 
 const removeNote = (notes: noteState[], id: number): noteState[] =>
   notes.filter((elem) => elem.id !== id);

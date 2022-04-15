@@ -1,10 +1,12 @@
 import { useDispatch } from "react-redux";
 import NotesContainer from "./components/NotesContainer";
 import CustomButton from "./components/UI/buttons/custom/CustomButton";
+import IconicButton from "./components/UI/buttons/iconic/IconicButton";
 import NoteForm from "./components/UI/forms/NoteForm";
 import CustomModal from "./components/UI/modal/CustomModal";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import { toggleModal } from "./store/actions/modalActions";
+import { archiveAllNotes, removeAllNotes } from "./store/actions/noteActions";
 import "./styles/App.css";
 
 function App() {
@@ -23,12 +25,14 @@ function App() {
             <div className="header__cell">Content</div>
             <div className="header__cell">Dates</div>
             <div className="header__cell">
-              <button id="archived_visibility" className="iconic_button">
-                <i className="fa-solid fa-box-archive"></i>
-              </button>
-              <button id="delete_all" className="iconic_button">
-                <i className="fa-solid fa-trash-can"></i>
-              </button>
+              <IconicButton
+                type="archiveAll"
+                onClick={archiveAllNotes}
+              />
+              <IconicButton
+                type="deleteAll"
+                onClick={removeAllNotes}
+              />
             </div>
           </div>
           <NotesContainer />
