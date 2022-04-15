@@ -6,7 +6,7 @@ const NotesContainer = () => {
 
   return (
     <div className="container__body">
-      {notes.map((note): JSX.Element => {
+      {notes.map((note): React.ReactElement => {
         return (
           <Note
             {...note}

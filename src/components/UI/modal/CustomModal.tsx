@@ -1,5 +1,5 @@
 interface modal_types {
-  children: JSX.Element;
+  children: React.ReactNode;
   active: boolean;
 }
 
