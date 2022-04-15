@@ -1,4 +1,4 @@
-import CategoriesContainer from "../CategoriesContainer";
+import CategoriesContainer from "./CategoriesContainer";
 
 const CategoriesSection = () => {
   return (

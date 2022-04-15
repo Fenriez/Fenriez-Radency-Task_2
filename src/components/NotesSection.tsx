@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { toggleModal } from '../../store/actions/modalActions';
-import { archiveAllNotes, removeAllNotes } from '../../store/actions/noteActions';
-import NotesContainer from '../NotesContainer';
-import CustomButton from '../UI/buttons/custom/CustomButton';
-import IconicButton from '../UI/buttons/iconic/IconicButton';
+import { toggleModal } from '../store/actions/modalActions';
+import { archiveAllNotes, removeAllNotes } from '../store/actions/noteActions';
+import NotesContainer from './NotesContainer';
+import CustomButton from './UI/buttons/custom/CustomButton';
+import IconicButton from './UI/buttons/iconic/IconicButton';
 
 const NotesSection = () => {
   const dispatch = useDispatch();

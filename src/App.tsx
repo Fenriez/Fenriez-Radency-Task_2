@@ -1,5 +1,5 @@
-import CategoriesSection from "./components/sections/CategoriesSection";
-import NotesSection from "./components/sections/NotesSection";
+import CategoriesSection from "./components/CategoriesSection";
+import NotesSection from "./components/NotesSection";
 import NoteForm from "./components/UI/forms/NoteForm";
 import CustomModal from "./components/UI/modal/CustomModal";
 import { useTypedSelector } from "./hooks/useTypedSelector";

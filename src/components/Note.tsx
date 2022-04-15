@@ -9,13 +9,19 @@ import {
   editNote,
   removeNote
 } from "../store/actions/noteActions";
-import { noteState } from "../store/reducers/NotesReducer";
+import { noteState } from "../store/types/notesReducerTypes";
 import IconicButton from "./UI/buttons/iconic/IconicButton";
 
 const Note = ({ ...props }: noteState) => {
-  let internal_dates = props.internalDates.join(", ");
+  const root_classes: string[] = ["note"];
+  const internal_dates = props.internalDates.join(", ");
 
   let tag: React.ReactNode;
+
+  if (props.isArchived) {
+    root_classes.push("archived");
+    // root_classes.push("hidden"); //UNCOMMENT TO HIDE NOTES ON BEING ARCHIVED
+  }
 
   switch (props.category) {
     case "Task":
@@ -32,7 +38,7 @@ const Note = ({ ...props }: noteState) => {
   }
 
   return (
-    <div className="note">
+    <div className={root_classes.join(" ")}>
       <div className="note__cell">{tag}</div>
       <div className="note__cell font_color__black">
         <p>{props.name}</p>

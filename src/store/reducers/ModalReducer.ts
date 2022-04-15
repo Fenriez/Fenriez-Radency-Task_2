@@ -1,17 +1,8 @@
-interface modalState {
-  modalVisible: boolean;
-}
-
-enum modalActionTypes {
-  TOGGLE_MODAL = "TOGGLE_MODAL",
-}
-
-interface toggleModal {
-  type: modalActionTypes.TOGGLE_MODAL;
-  payload?: boolean;
-}
-
-type modalAction = toggleModal;
+import {
+  modalAction,
+  modalActionTypes,
+  modalState
+} from "../types/modalReducerTypes";
 
 const initialState: modalState = {
   modalVisible: false,

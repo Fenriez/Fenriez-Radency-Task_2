@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { modalReducer } from "./ModalReducer";
-import { notesReducer } from "./NotesReducer";
+import { modalReducer } from "./modalReducer";
+import { notesReducer } from "./notesReducer";
 
 export const rootReducer = combineReducers({
   notes: notesReducer,
